@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>category</key>
+		<string>Leafy Greens</string>
+		<key>veggies</key>
+		<array>
+			<string>Kale</string>
+			<string>Spinach</string>
+			<string>Lettuce</string>
+			<string>Beet Greens</string>
+		</array>
+	</dict>
+	<dict>
+		<key>category</key>
+		<string>Root Veggies</string>
+		<key>veggies</key>
+		<array>
+			<string>Potatos</string>
+			<string>Sweet Potatos</string>
+			<string>Yams</string>
+		</array>
+	</dict>
+	<dict>
+		<key>category</key>
+		<string>Cruciferous Veggies</string>
+		<key>veggies</key>
+		<array>
+			<string>Broccoli</string>
+			<string>Cabbage</string>
+			<string>Brussels Sprouts</string>
+			<string>Cauliflower</string>
+		</array>
+	</dict>
+</array>
+</plist>
