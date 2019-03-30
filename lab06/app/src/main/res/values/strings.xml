@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Fruits in Season</string>
+    <string name="name">Name</string>
+    <string name="season">Season:</string>
+    <string name="namePrompt">Name:</string>
+    <string name="seasonPrompt">Season:</string>
+    <string name="name_of_fruit">Name of Fruit</string>
+    <string name="best_season_for_fruit">Best Season for Fruit</string>
+</resources>
