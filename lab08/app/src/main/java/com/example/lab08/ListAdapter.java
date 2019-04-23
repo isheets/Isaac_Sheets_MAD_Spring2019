@@ -58,17 +58,6 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
             }
         });
 
-
-
-        //long click listener
-        viewHolder.itemView.setOnLongClickListener(new View.OnLongClickListener(){
-
-            @Override
-            public boolean onLongClick(View v) {
-                return false;
-            }
-        });
-
         //context menu
         viewHolder.itemView.setOnCreateContextMenuListener(new View.OnCreateContextMenuListener(){
             @Override
