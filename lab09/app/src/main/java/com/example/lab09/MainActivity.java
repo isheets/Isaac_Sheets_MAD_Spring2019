@@ -92,10 +92,11 @@ public class MainActivity extends AppCompatActivity {
 
 
             try {
-                JSONObject object = (JSONObject) new JSONTokener(response).nextValue();
+                JSONObject responseObject = (JSONObject) new JSONTokener(response).nextValue();
                 //TODO: populate questions and options(random) (decode strings before displaying), keep track of correct (maybe look at swift logic)
-
-
+                Log.d("debug", responseObject.toString(4));
+                String question = responseObject.getJSONArray("results").getJSONObject(0).getString("question");
+                Log.d("debug", "question: " + question);
             } catch (Exception e) {
                 e.printStackTrace();
             }
