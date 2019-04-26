@@ -10,9 +10,9 @@
         android:id="@+id/questionText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="8dp"
+        android:layout_marginLeft="16dp"
         android:layout_marginTop="16dp"
-        android:layout_marginRight="8dp"
+        android:layout_marginRight="16dp"
         android:text="@string/question_here"
         android:textAppearance="@android:style/TextAppearance.Medium"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -21,6 +21,7 @@
 
     <Button
         android:id="@+id/option1"
+        android:tag="1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -34,6 +35,7 @@
 
     <Button
         android:id="@+id/option2"
+        android:tag="2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -47,6 +49,7 @@
 
     <Button
         android:id="@+id/option3"
+        android:tag="3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -60,6 +63,7 @@
 
     <Button
         android:id="@+id/option4"
+        android:tag="4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"

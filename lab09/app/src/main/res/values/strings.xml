@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">lab09</string>
+    <string name="app_name">Trivia App</string>
     <string name="new_question">New Question</string>
     <string name="button">Button</string>
     <string name="question_here">Question here</string>
