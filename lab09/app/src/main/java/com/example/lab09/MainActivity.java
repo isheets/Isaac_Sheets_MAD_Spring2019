@@ -1,5 +1,6 @@
 package com.example.lab09;
 
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -18,22 +19,25 @@ import java.io.UnsupportedEncodingException;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import javax.net.ssl.HttpsURLConnection;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-    Button newQuestion;
-     int correctAnswerId = 0;
+     Button newQuestion;
      Button option1;
      Button option2;
      Button option3;
      Button option4;
+     List<Button> buttonList = new ArrayList<>();
 
      TextView questionText;
 
+
      List<String> options = new ArrayList<>();
+     String correctAnswer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +55,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         option4 = findViewById(R.id.option4);
         option4.setOnClickListener(this);
 
+        //add buttons to arraylist
+        buttonList.add(option1);
+        buttonList.add(option2);
+        buttonList.add(option3);
+        buttonList.add(option4);
+
+        for(Button curButt : buttonList) {
+            curButt.setAlpha(0);
+        }
+
         //get the question textView
         questionText = findViewById(R.id.questionText);
 
@@ -64,25 +78,56 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         });
     }
 
-    public void checkAnswer(int tag) {
+    public void checkAnswer(Button choice) {
         //answer correct
-        if(tag == correctAnswerId) {
+        if(choice.getText().equals(correctAnswer)) {
+            //disable buttons, show next question button, highlight selection
+            for(Button curButt : buttonList) {
+                curButt.setEnabled(false);
+                if(curButt == choice) {
+                    choice.setBackgroundColor(getResources().getColor(R.color.green));
+                }
+                else {
+                    curButt.setAlpha((float) 0.5);
+                }
+            }
 
         }
         else { //answer incorrect
-
+            //show selection, highlight correct answer, disable buttons
+            for(Button curButt : buttonList) {
+                curButt.setEnabled(false);
+                if(curButt == choice) {
+                    curButt.setBackgroundColor(getResources().getColor(R.color.red));
+                }
+                else if(curButt.getText().equals(correctAnswer)) {
+                    curButt.setBackgroundColor(getResources().getColor(R.color.green));
+                    curButt.setAlpha((float) 0.75);
+                }
+                else {
+                    curButt.setAlpha((float) 0.5);
+                }
+            }
         }
+        newQuestion.setAlpha(1);
     }
 
     @Override
     public void onClick(View v) {
-        checkAnswer((Integer) v.getTag());
+        checkAnswer((Button) v);
     }
 
     class FetchQuestion extends AsyncTask<String, Void, String> {
 
         protected void onPreExecute() {
             //do stuff like reset textviews, show progressbar, etc
+            for(Button curButt : buttonList) {
+                curButt.setAlpha(0);
+                questionText.setAlpha(0);
+            }
+            newQuestion.setAlpha(0);
+            correctAnswer = "";
+            options.removeAll(options);
         }
 
         @Override
@@ -145,9 +190,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 question = java.net.URLDecoder.decode(question, StandardCharsets.UTF_8.name());
                 //set the text
                 questionText.setText(question);
+                questionText.setAlpha(1);
 
                 //get the options
-                String correctAnswer = responseObject.getJSONArray("results").getJSONObject(0).getString("correct_answer");
+                correctAnswer = responseObject.getJSONArray("results").getJSONObject(0).getString("correct_answer");
                 correctAnswer = java.net.URLDecoder.decode(correctAnswer, StandardCharsets.UTF_8.name());
                 options.add(correctAnswer);
 
@@ -159,7 +205,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     options.add(curAnswer);
                 }
 
-                //TODO: we have array of questions and array of options, need to shuffle options array and set text for option buttons
+                //randomize options
+                Collections.shuffle(options);
+
+                //set the text for option buttons
+                option1.setText(options.get(0));
+                option2.setText(options.get(1));
+                option3.setText(options.get(2));
+                option4.setText(options.get(3));
+
+                //show the buttons
+                for(Button curButt : buttonList) {
+                    curButt.setEnabled(true);
+                    curButt.setBackgroundColor(getResources().getColor(R.color.gray));
+                    curButt.setAlpha(1);
+                }
 
                 Log.d("debug", "question: " + question);
                 Log.d("debug", "options" + options);
