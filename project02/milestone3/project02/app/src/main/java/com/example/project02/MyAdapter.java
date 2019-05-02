@@ -33,6 +33,8 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ButtonViewHolder> 
         return new ButtonViewHolder(view);
     }
 
+
+
     public void updateList(List<Integer> buttonList) {
         this.buttonList = buttonList;
     }
@@ -40,12 +42,10 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ButtonViewHolder> 
 
     @Override
     public void onBindViewHolder(@NonNull ButtonViewHolder viewHolder, int i) {
-        Log.d("debuglog", "Button Number: " + i);
     }
 
     @Override
     public int getItemCount() {
-        Log.d("debuglog", "List Length: " + buttonList.size());
         return buttonList.size();
     }
 
@@ -59,9 +59,11 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ButtonViewHolder> 
         public ButtonViewHolder(@NonNull View itemView) {
             super(itemView);
             gridButt = itemView.findViewById(R.id.gridButt);
-            gridButt.setBackgroundColor(Color.GRAY);
             gridButt.setTag(this);
             gridButt.setOnClickListener(mOnItemClickListener);
+            gridButt.setAlpha(.5f);
+            Log.d("debuglog", "adding button with tag: " + this);
+            MainActivity.buttList.add(gridButt);
         }
     }
 }
